@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رزومه حسین مرادی</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- React & ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;300;400;700;900&display=swap');
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .glass-panel:hover {
+            border-color: rgba(34, 211, 238, 0.3);
+            background: rgba(30, 41, 59, 0.8);
+        }
+
+        @keyframes bounce-slow {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .animate-bounce-slow {
+            animation: bounce-slow 2s infinite;
+        }
+
+        /* اسکرول‌بار زیبا */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const Icon = ({ name, size = 20, className = "" }) => {
+            useEffect(() => {
+                if (window.lucide) window.lucide.createIcons();
+            }, [name]);
+            return <i data-lucide={name} style={{ width: size, height: size }} className={className}></i>;
+        };
+
+        function App() {
+            const [scrollY, setScrollY] = useState(0);
+
+            useEffect(() => {
+                const handleScroll = () => setScrollY(window.scrollY);
+                window.addEventListener("scroll", handleScroll);
+                if (window.lucide) window.lucide.createIcons();
+                return () => window.removeEventListener("scroll", handleScroll);
+            }, []);
+
+            const skillGroups = [
+                {
+                    title: "برنامه‌نویسی و وب",
+                    icon: "code",
+                    skills: [
+                        { name: "Python", level: "پیشرفته" },
+                        { name: "Html & CSS", level: "پیشرفته" },
+                        { name: "Wordpress", level: "پیشرفته" },
+                        { name: "React", level: "متوسط" },
+                        { name: "Next.js", level: "متوسط" },
+                        { name: "Node.js", level: "متوسط" },
+                        { name: "JavaScript", level: "متوسط" }
+                    ]
+                },
+                {
+                    title: "هوش مصنوعی و داده",
+                    icon: "brain",
+                    skills: [
+                        { name: "مدل‌های زبانی (LLM)", level: "تجربه عملی" },
+                        { name: "یادگیری ماشین", level: "تجربه عملی" },
+                        { name: "SQL/DS", level: "متوسط" },
+                        { name: "MongoDB", level: "متوسط" }
+                    ]
+                },
+                {
+                    title: "گرافیک و تدوین",
+                    icon: "palette",
+                    skills: [
+                        { name: "Adobe Photoshop", level: "پیشرفته" },
+                        { name: "Adobe Premiere", level: "پیشرفته" },
+                        { name: "Adobe Illustrator", level: "متوسط" },
+                        { name: "تدوین ویدیو", level: "حرفه‌ای" }
+                    ]
+                }
+            ];
+
+            const experiences = [
+                {
+                    title: "تولید محتوا و تدوینگر",
+                    company: "آکادمی AI to Zed",
+                    period: "آبان ۱۴۰۴ - تاکنون",
+                    desc: "اکتور، سناریونویس و تدوینگر. رشد پیج از ۲۰۰۰ به ۱۲.۵ هزار فالور با ۱۲ پست آخر. طراحی سایت مجموعه."
+                },
+                {
+                    title: "کارشناس و مدرس هوش مصنوعی",
+                    company: "آکادمی AI to Zed",
+                    period: "دی ۱۴۰۳ - تاکنون",
+                    desc: "تدریس مباحث نوین هوش مصنوعی و کاربردهای عملی آن."
+                },
+                {
+                    title: "برنامه‌نویس",
+                    company: "نوفاز",
+                    period: "دی ۱۴۰۳ - تاکنون",
+                    desc: "فعالیت در تیم فنی و توسعه پروژه‌های نرم‌افزاری."
+                },
+                {
+                    title: "تولید محتوا و رشد پیج",
+                    company: "elariiina",
+                    period: "۱ ماهه (پروژه‌ای)",
+                    desc: "رشد پیج از ۳۰۰ فالور به ۶۰ هزار فالور در یک ماه با استراتژی تولید محتوای دقیق."
+                },
+                {
+                    title: "طراح وب‌سایت فریلنسر",
+                    company: "شخصی",
+                    period: "فروردین ۱۴۰۰ - مهر ۱۴۰۳",
+                    desc: "طراحی و پشتیبانی بیش از ۱۰ وب‌سایت فروشگاهی و شرکتی حرفه‌ای."
+                }
+            ];
+
+            const webProjects = [
+                { name: "ترنج پرفیوم", url: "https://toranjperfume.shop/" },
+                { name: "نبات جان", url: "https://nabatejan.com/" },
+                { name: "فرام هوم", url: "https://feramhome.com/" },
+                { name: "شاینی شاپ", url: "https://shanilsop.ir/" },
+                { name: "شیکومات", url: "https://shikomat.com/" },
+                { name: "چیچیدونی", url: "https://chichidoani.com/" }
+            ];
+
+            const editingProjects = [
+                {
+                    name: "پیج Elariiina",
+                    url: "https://www.instagram.com/elariiina/",
+                    desc: "صفر تا صد تدوین این پیج بر عهده بنده بوده است."
+                },
+                {
+                    name: "پیج elahe ahour",
+                    url: "https://www.instagram.com/elahe_ahour/",
+                    desc: "صفر تا صد تدوین این پیج بر عهده بنده بوده است."
+                },
+                {
+                    name: "آکادمی AI to Zed",
+                    url: "https://www.instagram.com/aitozed.ir/",
+                    desc: "تمامی تدوین‌ها توسط بنده انجام شده و در ۱۲ پست نیز به عنوان اکتور حضور داشتم."
+                },
+                {
+                    name: "ترازیابان نواندیش شایان",
+                    url: "https://www.instagram.com/tarazyabannewandish/",
+                    desc: "تدوین ۶ عدد ریلز حرفه‌ای برای این مجموعه."
+                }
+            ];
+
+            return (
+                <div className="relative">
+                    {/* Hero Section */}
+                    <div className="fixed top-0 left-0 w-full h-screen bg-black flex flex-col justify-end items-center overflow-hidden -z-10">
+                        <div
+                            className="absolute top-[30%] w-full text-center z-0 transition-all duration-500"
+                            style={{
+                                transform: `translateY(${scrollY * 0.4}px)`,
+                                opacity: Math.max(0, 1 - scrollY / 500)
+                            }}
+                        >
+                            <h1 className="text-6xl md:text-[11vw] font-black text-transparent bg-clip-text bg-gradient-to-b from-gray-400 to-gray-800 opacity-50 leading-none">
+                                حسینــــــــــ‌مـــرادی
+                            </h1>
+                            <p className="text-gray-400 text-lg md:text-3xl mt-4 tracking-[0.3em] font-light">Editor & graphic Designer</p>
+                        </div>
+
+                        <img
+                            src="H3in8.png"
+                            alt="حسین مرادی"
+                            className="relative z-10 w-full max-w-2xl h-auto max-h-[85vh] object-contain object-bottom transition-all duration-500"
+                            style={{
+                                mixBlendMode: 'lighten',
+                                transform: `translateY(${scrollY * 0.15}px) scale(${1 + scrollY * 0.0002})`,
+                                opacity: Math.max(0, 1 - scrollY / 700)
+                            }}
+                        />
+
+                        <div className="absolute bottom-12 z-20 animate-bounce-slow text-cyan-400 opacity-70">
+                            <Icon name="chevron-down" size={48} />
+                        </div>
+                        <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent z-20"></div>
+                    </div>
+
+                    {/* Content Section */}
+                    <main className="relative z-30 w-full mt-[100vh] bg-slate-900 rounded-t-[4rem] shadow-[0_-20px_60px_rgba(0,0,0,0.8)] pt-16 pb-20 px-6 md:px-12 lg:px-32">
+
+                        <div className="max-w-5xl mx-auto">
+                            {/* Header Info */}
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+                                <div className="glass-panel p-6 rounded-3xl flex items-center gap-4">
+                                    <div className="p-3 bg-cyan-500/20 rounded-2xl text-cyan-400"><Icon name="map-pin" /></div>
+                                    <div><p className="text-xs text-gray-500">محل سکونت</p><p className="font-bold">تهران</p></div>
+                                </div>
+                                <div className="glass-panel p-6 rounded-3xl flex items-center gap-4">
+                                    <div className="p-3 bg-purple-500/20 rounded-2xl text-purple-400"><Icon name="shield-check" /></div>
+                                    <div><p className="text-xs text-gray-500">نظام وظیفه</p><p className="font-bold">محصل</p></div>
+                                </div>
+                                <div className="glass-panel p-6 rounded-3xl flex items-center gap-4">
+                                    <div className="p-3 bg-amber-500/20 rounded-2xl text-amber-400"><Icon name="calendar" /></div>
+                                    <div><p className="text-xs text-gray-500">سن</p><p className="font-bold">۲۲ سال</p></div>
+                                </div>
+                            </div>
+
+                            {/* About Section */}
+                            <section className="mb-24">
+                                <div className="flex items-center gap-4 mb-8">
+                                    <div className="h-10 w-2 bg-cyan-500 rounded-full"></div>
+                                    <h2 className="text-4xl font-black">درباره من</h2>
+                                </div>
+                                <p className="text-xl leading-10 text-gray-300 text-justify font-light">
+                                    من حسین مرادی، برنامه‌نویس هوش مصنوعی و توسعه‌دهنده وب هستم. تخصص اصلی من در ترکیب تکنولوژی‌های <span className="text-cyan-400 font-bold">Front-end</span> و <span className="text-cyan-400 font-bold">Back-end</span> با قدرت <span className="text-purple-400 font-bold">هوش مصنوعی</span>  .است. با بیش از ۵ سال سابقه کار فنی، تجربه‌ی موفقی در رشد انفجاری شبکه‌های اجتماعی و پیاده‌سازی زیرساخت‌های پیچیده وب داشته‌ام. همیشه تشنه‌ی یادگیری مدل‌های جدید زبانی و یادگیری ماشین هستم تا راه‌حل‌های هوشمندتری برای چالش‌های دنیای واقعی پیدا کنم. ادیت و تدوین ویدیو را از علاقه زیاد به این حوضه پیش گرفته‌ام و کارم ساختن ان جذابیتی است که از خلاقیت دورن دهنم میسازم تا چشم مخاطب را درگیر کند.
+                                </p>
+                            </section>
+
+                            {/* Skills Grid */}
+                            <section className="mb-24">
+                                <h2 className="text-3xl font-bold mb-10 flex items-center gap-3">
+                                    <Icon name="zap" className="text-amber-400" />
+                                    تخصص‌های فنی
+                                </h2>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                    {skillGroups.map((group, i) => (
+                                        <div key={i} className="glass-panel p-8 rounded-3xl">
+                                            <div className="flex items-center gap-3 mb-6">
+                                                <Icon name={group.icon} className="text-cyan-400" size={28} />
+                                                <h3 className="text-xl font-bold text-white">{group.title}</h3>
+                                            </div>
+                                            <div className="space-y-4">
+                                                {group.skills.map((s, idx) => (
+                                                    <div key={idx} className="flex justify-between items-center">
+                                                        <span className="text-gray-300">{s.name}</span>
+                                                        <span className={`text-[10px] px-2 py-1 rounded-md ${s.level === 'پیشرفته' ? 'bg-cyan-500/20 text-cyan-400' : 'bg-slate-700 text-gray-400'}`}>
+                                                            {s.level}
+                                                        </span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+
+                            {/* Editing Portfolio - NEW SECTION */}
+                            <section className="mb-24">
+                                <h2 className="text-3xl font-bold mb-10 flex items-center gap-3">
+                                    <Icon name="video" className="text-red-400" />
+                                    نمونه‌کارهای ادیت و تدوین ویدیو
+                                </h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    {editingProjects.map((p, i) => (
+                                        <a href={p.url} target="_blank" key={i} className="glass-panel p-8 rounded-3xl group block">
+                                            <div className="flex justify-between items-center mb-4">
+                                                <h3 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">{p.name}</h3>
+                                                <Icon name="instagram" className="text-pink-500" />
+                                            </div>
+                                            <p className="text-gray-400 text-sm leading-7 mb-4">{p.desc}</p>
+                                            <div className="flex items-center gap-2 text-xs text-cyan-500 font-bold">
+                                                مشاهده پیج <Icon name="external-link" size={14} />
+                                            </div>
+                                        </a>
+                                    ))}
+                                </div>
+                            </section>
+
+                            {/* Experience Timeline */}
+                            <section className="mb-24">
+                                <h2 className="text-3xl font-bold mb-12 flex items-center gap-3">
+                                    <Icon name="history" className="text-cyan-400" />
+                                    سوابق شغلی
+                                </h2>
+                                <div className="space-y-8 border-r-2 border-slate-800 pr-8 mr-4">
+                                    {experiences.map((exp, i) => (
+                                        <div key={i} className="relative">
+                                            <div className="absolute -right-[41px] top-0 w-4 h-4 rounded-full bg-cyan-500 shadow-[0_0_15px_rgba(34,211,238,0.5)]"></div>
+                                            <div className="glass-panel p-8 rounded-3xl hover:translate-x-[-8px]">
+                                                <div className="flex flex-wrap justify-between items-start gap-4 mb-4">
+                                                    <div>
+                                                        <h3 className="text-2xl font-bold text-white">{exp.title}</h3>
+                                                        <p className="text-cyan-400 font-medium">{exp.company}</p>
+                                                    </div>
+                                                    <span className="bg-slate-800 text-gray-400 px-4 py-1 rounded-full text-sm">{exp.period}</span>
+                                                </div>
+                                                <p className="text-gray-400 leading-8">{exp.desc}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+
+                            {/* Web Portfolio */}
+                            <section className="mb-24">
+                                <h2 className="text-3xl font-bold mb-10 flex items-center gap-3">
+                                    <Icon name="globe" className="text-purple-400" />
+                                    پروژه‌های وب‌سایت
+                                </h2>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {webProjects.map((p, i) => (
+                                        <a href={p.url} target="_blank" key={i} className="glass-panel p-6 rounded-2xl flex justify-between items-center group">
+                                            <span className="font-bold group-hover:text-cyan-400 transition-colors">{p.name}</span>
+                                            <Icon name="external-link" size={18} className="text-slate-600 group-hover:text-cyan-400" />
+                                        </a>
+                                    ))}
+                                </div>
+                            </section>
+
+                            {/* Contact Footer Card */}
+                            <section className="glass-panel p-10 rounded-[3rem] text-center border-t-4 border-t-cyan-500">
+                                <h2 className="text-3xl font-black mb-4">بیایید با هم بسازیم!</h2>
+                                <p className="text-gray-400 mb-10">من همیشه آماده‌ی همکاری در پروژه‌های چالش‌برانگیز و هوشمند هستم.</p>
+                                <div className="flex flex-wrap justify-center gap-6">
+                                    <a href="tel:09102420584" className="flex items-center gap-3 bg-cyan-600 hover:bg-cyan-500 px-8 py-4 rounded-2xl font-bold transition-all">
+                                        <Icon name="phone" /> ۰۹۱۰۲۴۲۰۵۸۴
+                                    </a>
+                                    <a href="https://wa.me/989102420584" className="flex items-center gap-3 bg-green-600 hover:bg-green-500 px-8 py-4 rounded-2xl font-bold transition-all">
+                                        <Icon name="message-circle" /> واتساپ
+                                    </a>
+                                    <a href="https://t.me/Hsinmrdi8" className="flex items-center gap-3 bg-blue-600 hover:bg-blue-500 px-8 py-4 rounded-2xl font-bold transition-all">
+                                        <Icon name="send" /> تلگرام
+                                    </a>
+                                    <a href="https://github.com/Hsinmrdi8" className="flex items-center gap-3 bg-slate-700 hover:bg-slate-600 px-8 py-4 rounded-2xl font-bold transition-all">
+                                        <Icon name="github" /> گیت‌هاب
+                                    </a>
+                                </div>
+                                <div className="mt-8 pt-8 border-t border-slate-800 text-gray-500 text-sm">
+                                </div>
+                            </section>
+                        </div>
+                    </main>
+
+                    <footer className="relative z-10 bg-slate-950 text-center py-10 text-gray-600 text-sm">
+                        تمامی حقوق برای حسین مرادی محفوظ است © ۲۰۲۴
+                    </footer>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+
+</html>
